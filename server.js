@@ -11,7 +11,7 @@ const server = http.createServer((req, res) => {
   res.writeHead(200, { "Content-Type": "text/html; charset=utf-8" });
   res.end(`<main style="font-family: system-ui; padding: 2rem; line-height: 1.5">
     <h1>Coolify works! 🚀</h1>
-    <p>Deployed from Git → built by Coolify → running in a container.</p>
+    <p>Deployed from Git → built by Coolify → powered by Gozunga 🚀.</p>
     <p><strong>PORT:</strong> ${PORT}</p>
   </main>`);
 });
