@@ -1,0 +1,108 @@
+:root{
+  --bg1:#0b0f1a; --bg2:#121a2b;
+  --card:#0b1220; --text:#e6edf3; --muted:#9fb0c8;
+  --accent:#7c3aed;
+}
+
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0; font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial;
+  color:var(--text);
+  background: radial-gradient(100% 80% at 50% 0%, #16213a 0%, #0b0f1a 60%, #060910 100%);
+  overflow:hidden;
+}
+
+/* make everything bigger */
+.card{
+  position:relative; z-index:1;
+  width:min(1060px, 94vw);      /* wider */
+  margin:4vh auto; padding:32px 28px;   /* more padding */
+  background:linear-gradient(180deg, #0b1220cc, #0b1220f2);
+  border:1px solid #1f2a44; border-radius:22px; box-shadow:0 22px 64px #000a;
+  backdrop-filter: blur(12px);
+  max-height:92vh; overflow:auto; scrollbar-gutter:stable;
+}
+
+.bg-gradient{
+  position:absolute; inset: -25%;
+  background: conic-gradient(from 0deg, #0ea5e9, #a78bfa, #22d3ee, #60a5fa, #0ea5e9);
+  filter: blur(140px) opacity(.25);
+  animation: spin 40s linear infinite;
+}
+@keyframes spin {to{transform:rotate(360deg)}}
+
+.particles{
+  position:absolute; inset:0; pointer-events:none;
+  background-image: radial-gradient(#ffffff1b 1px, transparent 1px);
+  background-size: 26px 26px;
+  animation: drift 12s ease-in-out infinite alternate;
+  opacity:.22;
+}
+@keyframes drift {from{transform:translateY(0)}to{transform:translateY(-14px)}}
+
+.brand{display:flex; align-items:center; gap:14px; margin-bottom:8px}
+.brand .titles{flex:1}
+.brand h1{font-size:2rem; margin:0}
+.brand .tag{margin:0; color:var(--muted); font-size:1rem}
+.controls{display:flex; gap:8px}
+.sm{font-size:.9rem; padding:8px 10px}
+
+.dot{width:14px; height:14px; border-radius:50%; background:var(--accent); box-shadow:0 0 16px var(--accent)}
+
+.progress{height:10px; background:#0f172a; border:1px solid #223154; border-radius:999px; overflow:hidden; margin:10px 0 4px}
+.progress > span{display:block; height:100%; width:0%; background:linear-gradient(90deg,#6366f1,#22d3ee); transition:width .35s ease}
+
+.lead{font-size:1.3rem; color:#d5def4; margin:4px 0 16px}
+.screen{display:none; margin-top:12px}
+.screen.active{display:block}
+
+h2{margin:14px 0 10px; font-size:1.4rem}
+
+.grid{
+  display:grid; gap:14px;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+}
+@media (min-width:680px){ .grid{grid-template-columns:repeat(4,minmax(0,1fr));} }
+
+/* Bigger, bouncier chips */
+.chip{
+  border:1px solid #2c3957; background:#0e1530; color:#dbe6ff; padding:16px 14px;
+  border-radius:16px; cursor:pointer; font-size:1.05rem; font-weight:600;
+  transition:transform .14s, box-shadow .14s, border-color .14s, background .14s, filter .14s;
+}
+.chip:hover{transform:translateY(-2px) scale(1.02); box-shadow:0 10px 24px #0008; border-color:#4c5b87}
+.chip:active{transform:translateY(0) scale(1)}
+.bubble{position:relative; overflow:hidden}
+.bubble::after{
+  content:""; position:absolute; inset:auto -20% -40% -20%; height:140%; background:radial-gradient(circle at 50% 0%, #ffffff10, transparent 55%);
+  transform:translateY(40%); transition:transform .3s ease;
+}
+.bubble:hover::after{transform:translateY(20%)}
+
+/* Buttons */
+.btn{
+  background:linear-gradient(90deg, #6366f1, #22d3ee);
+  color:#081226; border:0; padding:14px 18px; border-radius:16px; cursor:pointer; font-weight:700;
+  box-shadow:0 10px 26px #0008; transition:filter .15s, transform .15s;
+}
+.btn:hover{filter:brightness(1.06); transform:translateY(-2px)}
+.btn-ghost{
+  background:transparent; color:#d1d7ec; border:1px solid #3a4770; padding:12px 14px; border-radius:14px; cursor:pointer;
+}
+.btn.xl{font-size:1.15rem; padding:16px 22px}
+.btn.lg{font-size:1.05rem;}
+
+/* Result canvas */
+.signature{
+  height:260px; border-radius:18px; border:1px dashed #2b3657; margin-top:10px;
+  display:grid; grid-template-columns:repeat(15,1fr); gap:8px; padding:8px; background:#0d1328;
+}
+.signature .cell{border-radius:12px; height:100%; transition:transform .2s, filter .2s}
+.signature .cell:hover{transform:scale(1.05); filter:saturate(1.2)}
+
+.blurb{color:#c7d2fe; margin:12px 0 4px; font-size:1.05rem}
+.foot{margin-top:14px; color:var(--muted); text-align:center; font-size:.9rem}
+
+.foot a{color:#a3b7ff; text-decoration:none; border-bottom:1px dotted #41508a}
+.foot a:hover{color:#cfe0ff; border-bottom-color:#6f85d6}

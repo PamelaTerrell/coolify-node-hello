@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>ColorQuest — play with color</title>
+  <meta name="description" content="Pick colors, textures, and creative energy to reveal your color signature. A playful mini-game by Pamela J Terrell." />
+  <link rel="canonical" href="https://play.pamelajterrell.com/" />
+  <meta name="theme-color" content="#0f172a" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <meta name="robots" content="index,follow" />
+  <meta property="og:title" content="ColorQuest — play with color" />
+  <meta property="og:description" content="A tiny art game with choices, color, and surprises." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://play.pamelajterrell.com/" />
+  <link rel="icon" href="/favicon.ico" />
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+  <div id="app">
+    <div class="bg-gradient" aria-hidden="true"></div>
+    <div class="particles" aria-hidden="true"></div>
+
+    <main class="card">
+      <header class="brand">
+        <span class="dot"></span>
+        <div class="titles">
+          <h1>ColorQuest</h1>
+          <p class="tag">where code meets color</p>
+        </div>
+        <div class="controls">
+          <button id="soundToggle" class="btn-ghost sm" aria-pressed="false" title="Toggle sound">🔈 Sound</button>
+        </div>
+      </header>
+
+      <!-- progress (welcome + 4 rounds) -->
+      <div id="progress" class="progress" aria-hidden="true"><span></span></div>
+
+      <!-- Screens -->
+      <section id="screen-welcome" class="screen active">
+        <p class="lead">Welcome to ColorQuest. Ready to paint your vibe?</p>
+        <button class="btn xl" data-action="start">Start the Journey</button>
+      </section>
+
+      <section id="screen-round1" class="screen">
+        <h2>1. Choose a color feeling</h2>
+        <div class="choices grid">
+          <button class="chip bubble" data-color="#ffd166" data-label="Joy">💛 Joy</button>
+          <button class="chip bubble" data-color="#6ecbff" data-label="Calm">💙 Calm</button>
+          <button class="chip bubble" data-color="#ff6b6b" data-label="Passion">❤️ Passion</button>
+          <button class="chip bubble" data-color="#6ee7b7" data-label="Growth">💚 Growth</button>
+        </div>
+      </section>
+
+      <section id="screen-round2" class="screen">
+        <h2>2. Pick a texture</h2>
+        <div class="choices grid">
+          <button class="chip" data-texture="fluid">🌊 Fluid</button>
+          <button class="chip" data-texture="sparkly">✨ Sparkly</button>
+          <button class="chip" data-texture="structured">🧩 Structured</button>
+          <button class="chip" data-texture="chaotic">🔥 Chaotic</button>
+        </div>
+      </section>
+
+      <section id="screen-round3" class="screen">
+        <h2>3. What’s your creative energy?</h2>
+        <div class="choices grid">
+          <button class="chip" data-energy="dreaming">Dreaming</button>
+          <button class="chip" data-energy="building">Building</button>
+          <button class="chip" data-energy="reflecting">Reflecting</button>
+          <button class="chip" data-energy="exploring">Exploring</button>
+        </div>
+      </section>
+
+      <!-- Round 4: long-term purpose -->
+      <section id="screen-round4" class="screen">
+        <h2>4. In your long life’s journey, what’s your purpose?</h2>
+        <div class="choices grid">
+          <button class="chip" data-purpose="giver">Giver</button>
+          <button class="chip" data-purpose="taker">Taker</button>
+          <button class="chip" data-purpose="pleaser">Pleaser</button>
+          <button class="chip" data-purpose="builder">Builder</button>
+          <button class="chip" data-purpose="seeker">Seeker</button>
+        </div>
+      </section>
+
+      <section id="screen-result" class="screen">
+        <h2>Your Color Signature</h2>
+        <div id="signature" class="signature"></div>
+        <p id="blurb" class="blurb"></p>
+        <div class="actions">
+          <button class="btn lg" data-action="replay">Play Again</button>
+          <button class="btn btn-ghost lg" data-action="surprise">Surprise Me ✨</button>
+        </div>
+      </section>
+
+      <footer class="foot">
+        <small>
+          Created by
+          <a href="https://pamelajterrell.com" target="_blank" rel="noopener">Pamela J Terrell</a>
+          — Powered by
+          <a href="https://gozunga.com" target="_blank" rel="noopener">Gozunga</a>
+        </small>
+      </footer>
+    </main>
+  </div>
+
+  <script src="/app.js"></script>
+</body>
+</html>

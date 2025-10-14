@@ -1,19 +1,30 @@
-// Minimal HTTP server
-import http from "http";
+import express from "express";
+import path from "path";
+import { fileURLToPath } from "url";
 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+const app = express();
 const PORT = process.env.PORT || 3000;
 
-const server = http.createServer((req, res) => {
-  if (req.url === "/health") {
-    res.writeHead(200, { "Content-Type": "text/plain" });
-    return res.end("OK");
-  }
-  res.writeHead(200, { "Content-Type": "text/html; charset=utf-8" });
-  res.end(`<main style="font-family: system-ui; padding: 2rem; line-height: 1.5">
-    <h1>Coolify works! 🚀</h1>
-    <p>Deployed from Git → built by Coolify → powered by Gozunga 🚀.</p>
-    <p><strong>PORT:</strong> ${PORT}</p>
-  </main>`);
+// Light caching for static assets (10 minutes)
+app.use((req, res, next) => {
+  res.setHeader("Cache-Control", "public, max-age=600");
+  next();
 });
 
-server.listen(PORT, () => console.log("Server listening on port " + PORT));
+// Serve /public
+app.use(express.static(path.join(__dirname, "public"), { extensions: ["html"] }));
+
+// Simple health check for Coolify
+app.get("/healthz", (_req, res) => res.status(200).send("ok"));
+
+// SPA fallback (keeps it future-proof if you add routes)
+app.get("*", (_req, res) =>
+  res.sendFile(path.join(__dirname, "public", "index.html"))
+);
+
+app.listen(PORT, () => {
+  console.log(`ColorQuest listening on :${PORT}`);
+});
