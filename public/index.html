@@ -3,201 +3,125 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>ColorQuest — play with color</title>
-  <meta name="description" content="Pick colors, textures, and creative energy to reveal your color signature. A playful mini-game by Pamela J Terrell." />
-  <link rel="canonical" href="https://play.pamelajterrell.com/" />
-  <meta name="theme-color" content="#0f172a" />
-  <meta name="referrer" content="strict-origin-when-cross-origin" />
-  <meta name="robots" content="index,follow" />
-  <meta property="og:title" content="ColorQuest — play with color" />
-  <meta property="og:description" content="A tiny art game with choices, color, and surprises." />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://play.pamelajterrell.com/" />
+  <title>Mixer — pamelajterrell.com</title>
+  <meta name="description" content="Blend a classy, glistening martini. Your choices paint the glass." />
+  <meta name="theme-color" content="#0b0f1a" />
   <link rel="icon" href="/favicon.ico" />
   <link rel="stylesheet" href="/style.css" />
 </head>
 <body>
-  <div id="app">
-    <div class="bg-gradient" aria-hidden="true"></div>
-    <div class="particles" aria-hidden="true"></div>
+  <div class="mixer-wrap">
+    <div class="bg-sheen" aria-hidden="true"></div>
 
-    <main class="card">
-      <header class="brand">
-        <span class="dot"></span>
-        <div class="titles">
-          <h1>ColorQuest</h1>
-          <p class="tag">where code meets color</p>
+    <header class="mixer-head">
+      <h1>mixer<span class="dot">.</span>pamelajterrell<span class="com">.com</span></h1>
+      <p>Blend a classy, glistening martini. Your choices paint the glass.</p>
+    </header>
+
+    <main class="stage" role="main" aria-label="Mixer">
+      <!-- Glass -->
+      <div class="glass" id="glass" aria-label="Martini glass">
+        <svg viewBox="0 0 400 480" class="glass-svg" role="img" aria-label="martini glass">
+          <!-- stem + base -->
+          <g class="stem">
+            <rect x="195" y="210" width="10" height="180" rx="5"></rect>
+            <ellipse cx="200" cy="400" rx="80" ry="10"></ellipse>
+          </g>
+
+          <!-- bowl outline -->
+          <path class="bowl" d="M60 40 L340 40 L210 210 L190 210 Z"></path>
+
+          <!-- defs -->
+          <defs>
+            <clipPath id="bowl-clip">
+              <path d="M60 40 L340 40 L210 210 L190 210 Z"></path>
+            </clipPath>
+            <linearGradient id="shine" x1="0" x2="1">
+              <stop offset="0%" stop-color="#ffffffaa"/>
+              <stop offset="60%" stop-color="#ffffff10"/>
+              <stop offset="100%" stop-color="#ffffff00"/>
+            </linearGradient>
+          </defs>
+
+          <!-- liquid -->
+          <g clip-path="url(#bowl-clip)">
+            <rect id="liquid"
+                  x="65"
+                  y="210"
+                  width="270"
+                  height="170"
+                  rx="6"
+                  class="liquid"
+                  fill="hsl(200 60% 50%)"></rect>
+            <rect id="surface"
+                  x="70"
+                  y="210"
+                  width="260"
+                  height="3"
+                  rx="2"
+                  fill="#ffffff33"></rect>
+            <g id="sparkles" class="sparkles"></g>
+          </g>
+
+          <!-- bowl sheen + rim -->
+          <path class="sheen" d="M85 55 L200 55 L135 155 Z" fill="url(#shine)"></path>
+          <line x1="60" y1="40" x2="340" y2="40" class="rim"></line>
+        </svg>
+
+        <!-- Garnishes -->
+        <div class="garnish-layer">
+          <span id="gar-lemon" class="gar gar-lemon" title="Lemon" hidden>🍋</span>
+          <span id="gar-olive" class="gar gar-olive" title="Olive" hidden>🫒</span>
+          <span id="gar-cherry" class="gar gar-cherry" title="Cherry" hidden>🍒</span>
+          <span id="gar-cuke"  class="gar gar-cuke"  title="Cucumber" hidden>🥒</span>
         </div>
-        <div class="controls">
-          <button id="soundToggle" class="btn-ghost sm" aria-pressed="false" title="Toggle sound">🔈 Sound</button>
-        </div>
-      </header>
+      </div>
 
-      <!-- Progress -->
-      <div id="progress" class="progress" aria-hidden="true"><span></span></div>
+      <!-- Controls -->
+      <section class="controls" aria-label="Controls">
+        <fieldset class="panel">
+          <legend>Base</legend>
+          <div class="grid">
+            <button class="chip" data-base="gin">Gin</button>
+            <button class="chip" data-base="vodka">Vodka</button>
+          </div>
+        </fieldset>
 
-      <!-- Screens -->
-      <section id="screen-welcome" class="screen active">
-        <p class="lead">Welcome to ColorQuest. Ready to paint your vibe?</p>
-        <button class="btn xl" data-action="start">Start the Journey</button>
-      </section>
+        <fieldset class="panel">
+          <legend>Modifiers</legend>
+          <div class="grid">
+            <button class="chip" data-mod="dry-vermouth">Dry Vermouth</button>
+            <button class="chip" data-mod="sweet-vermouth">Sweet Vermouth</button>
+            <button class="chip" data-mod="bitters">Bitters</button>
+            <button class="chip" data-mod="simple">Simple Syrup</button>
+          </div>
+        </fieldset>
 
-      <section id="screen-round1" class="screen">
-        <h2>1. Choose a color feeling</h2>
-        <div class="choices grid">
-          <button class="chip bubble" data-color="#ffd166" data-label="Joy">💛 Joy</button>
-          <button class="chip bubble" data-color="#6ecbff" data-label="Calm">💙 Calm</button>
-          <button class="chip bubble" data-color="#ff6b6b" data-label="Passion">❤️ Passion</button>
-          <button class="chip bubble" data-color="#6ee7b7" data-label="Growth">💚 Growth</button>
-        </div>
-      </section>
+        <fieldset class="panel">
+          <legend>Garnish</legend>
+          <div class="grid">
+            <button class="chip" data-gar="lemon"><span class="ic">🍋</span>Lemon Twist</button>
+            <button class="chip" data-gar="olive"><span class="ic">🫒</span>Olive</button>
+            <button class="chip" data-gar="cherry"><span class="ic">🍒</span>Cherry</button>
+            <button class="chip" data-gar="cucumber"><span class="ic">🥒</span>Cucumber</button>
+          </div>
+        </fieldset>
 
-      <section id="screen-round2" class="screen">
-        <h2>2. Pick a texture</h2>
-        <div class="choices grid">
-          <button class="chip" data-texture="fluid">🌊 Fluid</button>
-          <button class="chip" data-texture="sparkly">✨ Sparkly</button>
-          <button class="chip" data-texture="structured">🧩 Structured</button>
-          <button class="chip" data-texture="chaotic">🔥 Chaotic</button>
-        </div>
-      </section>
-
-      <section id="screen-round3" class="screen">
-        <h2>3. What’s your creative energy?</h2>
-        <div class="choices grid">
-          <button class="chip" data-energy="dreaming">Dreaming</button>
-          <button class="chip" data-energy="building">Building</button>
-          <button class="chip" data-energy="reflecting">Reflecting</button>
-          <button class="chip" data-energy="exploring">Exploring</button>
-        </div>
-      </section>
-
-      <section id="screen-round4" class="screen">
-        <h2>4. In your long life’s journey, what’s your purpose?</h2>
-        <div class="choices grid">
-          <button class="chip" data-purpose="giver">Giver</button>
-          <button class="chip" data-purpose="taker">Taker</button>
-          <button class="chip" data-purpose="pleaser">Pleaser</button>
-          <button class="chip" data-purpose="builder">Builder</button>
-          <button class="chip" data-purpose="seeker">Seeker</button>
-        </div>
-      </section>
-
-      <section id="screen-result" class="screen">
-        <h2>Your Color Signature</h2>
-        <div id="signature" class="signature"></div>
-        <p id="blurb" class="blurb"></p>
         <div class="actions">
-          <button class="btn lg" data-action="replay">Play Again</button>
-          <button class="btn btn-ghost lg" data-action="surprise">Surprise Me ✨</button>
+          <button id="btn-shake" class="btn">Shake ✨</button>
+          <button id="btn-reset" class="btn ghost">Reset</button>
         </div>
+
+        <p id="signature" class="signature" aria-live="polite">Choose a base to begin.</p>
+
+        <p class="foot">
+          Created by <a href="https://pamelajterrell.com" target="_blank" rel="noopener">Pamela J Terrell</a>
+          — Powered by <a href="https://gozunga.com" target="_blank" rel="noopener">Gozunga</a>
+        </p>
       </section>
-
-      <div class="back-home">
-  <a href="https://pamelajterrell.com" class="btn-home">
-    ⬅ Back to pamelajterrell.com
-  </a>
-</div>
-
-
-      <footer class="foot">
-        <small>
-          Created by 
-          <a href="https://pamelajterrell.com" target="_blank" rel="noopener">Pamela J Terrell</a>
-          — Powered by 
-          <a href="https://gozunga.com" target="_blank" rel="noopener">Gozunga</a>
-        </small>
-      </footer>
     </main>
   </div>
 
-  <!-- Elegant floating pill -->
-  <a class="wm-pill" href="https://play.pamelajterrell.com" target="_blank" rel="noopener" aria-label="Open play.pamelajterrell.com">
-    <span class="wm-dot" aria-hidden="true"></span>
-    <span class="wm-text">play.pamelajterrell.com</span>
-  </a>
-
   <script src="/app.js"></script>
-
-  <style>
-    /* glowing watermark pill */
-    .wm-pill{
-      position:fixed;
-      right:20px;
-      bottom:18px;
-      z-index:25;
-      display:inline-flex;
-      align-items:center;
-      gap:10px;
-      padding:11px 18px;
-      border-radius:999px;
-      background:linear-gradient(145deg,#101b35cc 0%,#0c152ae6 100%);
-      border:1px solid #30467a;
-      color:#e7ecff;
-      text-decoration:none;
-      font-weight:600;
-      font-size:.95rem;
-      letter-spacing:.2px;
-      box-shadow:
-        0 10px 28px #000a,
-        inset 0 0 10px #334c88aa,
-        0 0 8px #4f78ff22;
-      backdrop-filter:blur(12px);
-      transition:all .25s ease;
-      opacity:0;
-      animation:
-        wmAppear 2s ease forwards 1s,
-        wmPulse 8s ease-in-out infinite;
-    }
-    .wm-pill:hover{
-      transform:translateY(-2px) scale(1.02);
-      border-color:#6b8cff;
-      box-shadow:
-        0 14px 42px #000c,
-        0 0 20px #7bb1ff44,
-        inset 0 0 18px #3c5fa5aa;
-      background:linear-gradient(145deg,#142447cc 0%,#0d172be6 100%);
-      text-shadow:0 0 8px #8fb8ff44;
-    }
-    .wm-dot{
-      width:11px;
-      height:11px;
-      border-radius:50%;
-      background:radial-gradient(circle at 30% 30%,#8bb8ff,#4d6aff);
-      box-shadow:
-        0 0 10px #5a84ff,
-        0 0 26px #4f78ff66,
-        inset 0 0 6px #4f78ff;
-      animation:wmDotGlow 4s ease-in-out infinite;
-    }
-    .wm-text{
-      color:#d8e2ff;
-      text-shadow:0 1px 0 #0008,0 0 8px #4f78ff33;
-      white-space:nowrap;
-      background:linear-gradient(90deg,#cfd9ff,#7fb0ff,#cfd9ff);
-      -webkit-background-clip:text;
-      -webkit-text-fill-color:transparent;
-      background-size:200% 100%;
-      animation:wmTextShift 8s linear infinite;
-    }
-    @keyframes wmPulse{
-      0%,100%{box-shadow:0 10px 28px #0009,0 0 14px #7fa8ff22;}
-      50%{box-shadow:0 14px 40px #000a,0 0 24px #8db8ff33;}
-    }
-    @keyframes wmDotGlow{
-      0%,100%{filter:brightness(1);}
-      50%{filter:brightness(1.4);}
-    }
-    @keyframes wmTextShift{
-      0%{background-position:0 0;}
-      100%{background-position:-200% 0;}
-    }
-    @keyframes wmAppear{
-      to{opacity:1;}
-    }
-    @media(max-width:460px){
-      .wm-pill{padding:8px 12px;font-size:.9rem;right:12px;bottom:12px;}
-    }
-  </style>
 </body>
 </html>
